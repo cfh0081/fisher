@@ -9,8 +9,6 @@ import (
 	"github.com/cfh0081/runutils"
 )
 
-var toRecordFile *os.File = nil
-
 type Storage struct {
 	file *os.File
 	ch   chan []byte
@@ -18,6 +16,10 @@ type Storage struct {
 
 var storage *Storage
 var once sync.Once
+
+func (storage *Storage) SetTarget(file *os.File) {
+	storage.file = file
+}
 
 func (storage *Storage) WriteData(data []byte) {
 	storage.ch <- data
@@ -50,17 +52,23 @@ func (storage *Storage) StoreData(ctx context.Context) {
 	}
 }
 
-func GetInstance() *Storage {
+func GetStorageInstance() *Storage {
 	once.Do(func() {
-		storage = &Storage{file: toRecordFile, ch: make(chan []byte, 64)}
+		storage = &Storage{file: nil, ch: make(chan []byte, 64)}
 	})
 	return storage
 }
 
 func RecordData(data []byte) {
-	GetInstance().WriteData(data)
+	GetStorageInstance().WriteData(data)
 }
 
+// 如果要将数据存储到文件中，则先需要调用该接口，设置用于写入的文件句柄
+func SetStorageTarget(file *os.File) {
+	GetStorageInstance().SetTarget(file)
+}
+
+// 需要使用go关键字，单独起一个协程运行
 func StartStorageServer(ctx context.Context) {
-	GetInstance().StoreData(ctx)
+	GetStorageInstance().StoreData(ctx)
 }
