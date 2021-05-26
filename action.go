@@ -12,6 +12,7 @@ import (
 
 type Crawler interface {
 	Crawl(ctx context.Context) error
+	ParseArgs(argMap map[string]string) error
 }
 
 func GetAction(crawler Crawler) CrawlAction {
@@ -41,7 +42,11 @@ func GetAction(crawler Crawler) CrawlAction {
 			)
 		}
 
-		// toRecordFile := outputFile
+		err := crawler.ParseArgs(customMap)
+		if err != nil {
+			fmt.Printf("%v call crawler.ParseArgs with error %v.\n", runutils.RunFuncName(), err)
+			return
+		}
 
 		RunWithCrawler(crawler, opts...)
 	}
@@ -49,7 +54,6 @@ func GetAction(crawler Crawler) CrawlAction {
 
 func RunWithCrawler(crawler Crawler, opts ...chromedp.ExecAllocatorOption) {
 	targetOpts := append(chromedp.DefaultExecAllocatorOptions[:],
-		chromedp.Flag("headless", false),       // 禁用chrome headless
 		chromedp.Flag("start-maximized", true), // 最大化运行（全屏窗口）
 		chromedp.Flag("incognito", true),       // 隐身模式（无痕模式）
 		chromedp.Flag("log-level", "2"),        // 日志级别 ( info(default) = 0 warning = 1 LOG_ERROR = 2 LOG_FATAL = 3 )
@@ -66,7 +70,6 @@ func RunWithCrawler(crawler Crawler, opts ...chromedp.ExecAllocatorOption) {
 	ctx, cancel := chromedp.NewContext(
 		allocCtx,
 		chromedp.WithLogf(log.Printf),
-		// chromedp.WithLogf(Printf),
 	)
 	defer cancel()
 
@@ -74,5 +77,7 @@ func RunWithCrawler(crawler Crawler, opts ...chromedp.ExecAllocatorOption) {
 	go StartStorageServer(ctx)
 
 	err := crawler.Crawl(ctx)
-	fmt.Printf("err: %v.\n", err)
+	if err != nil {
+		fmt.Printf("%v call crawler.Crawl with error %v.\n", runutils.RunFuncName(), err)
+	}
 }

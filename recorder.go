@@ -46,6 +46,7 @@ func (storage *Storage) StoreData(ctx context.Context) {
 				fmt.Println(v)
 			}
 		case <-ctx.Done():
+			fmt.Printf("%v to the end.\n", runutils.RunFuncName())
 			close(storage.ch)
 			return
 		}
@@ -68,7 +69,7 @@ func SetStorageTarget(file *os.File) {
 	GetStorageInstance().SetTarget(file)
 }
 
-// 需要使用go关键字，单独起一个协程运行
+// 需要使用go关键字，单独起一个协程运行，只有开启了该服务，才能存储数据
 func StartStorageServer(ctx context.Context) {
 	GetStorageInstance().StoreData(ctx)
 }
