@@ -1,7 +1,7 @@
 github.com/akamensky/argparse v1.2.2 h1:P17T0ZjlUNJuWTPPJ2A5dM1wxarHgHqfYH+AZTo2xQA=
 github.com/akamensky/argparse v1.2.2/go.mod h1:S5kwC7IuDcEr5VeXtGPRVZ5o/FdhcMlQz4IZQuw64xA=
-github.com/cfh0081/runutils v0.0.2 h1:QEKKn4cweleDRZL+8vDRh8Qe+m0OI68DqL2KnvNSeto=
-github.com/cfh0081/runutils v0.0.2/go.mod h1:FX9xmKmg9Pt6FuNMpfPpRjDEhMX/171oDGQjburPfDU=
+github.com/cfh0081/runutils v0.0.3 h1:Lee0PZ4/KKneCV7lQRxuCl0M3rP/wBZcgq2qmsjjjwo=
+github.com/cfh0081/runutils v0.0.3/go.mod h1:FX9xmKmg9Pt6FuNMpfPpRjDEhMX/171oDGQjburPfDU=
 github.com/chromedp/cdproto v0.0.0-20210508221054-d7cfa85db7d1 h1:EqxjOTf4Eh30cZ9OqA7pBzKEv3d+QDz0t/1HeRK/IaM=
 github.com/chromedp/cdproto v0.0.0-20210508221054-d7cfa85db7d1/go.mod h1:At5TxYYdxkbQL0TSefRjhLE3Q0lgvqKKMSFUglJ7i1U=
 github.com/chromedp/chromedp v0.7.2 h1:uNztM7xDJex+Mu0JUbpBDS7uCN/J71ZiCiJyHUwdrHg=

@@ -48,6 +48,8 @@ func GetAction(crawler Crawler) CrawlAction {
 			return
 		}
 
+		SetStorageTarget(outputFile)
+
 		RunWithCrawler(crawler, opts...)
 	}
 }
