@@ -55,15 +55,15 @@ func GetAction(crawler Crawler) CrawlAction {
 }
 
 func RunWithCrawler(crawler Crawler, opts ...chromedp.ExecAllocatorOption) {
-	targetOpts := append(chromedp.DefaultExecAllocatorOptions[:],
+	targetOpts := append(chromedp.DefaultExecAllocatorOptions[:], opts...)
+
+	targetOpts = append(targetOpts,
 		chromedp.Flag("start-maximized", true), // 最大化运行（全屏窗口）
 		chromedp.Flag("incognito", true),       // 隐身模式（无痕模式）
 		chromedp.Flag("log-level", "2"),        // 日志级别 ( info(default) = 0 warning = 1 LOG_ERROR = 2 LOG_FATAL = 3 )
 		chromedp.Flag("lang", `zh-CN,zh,zh-TW,en-US,en`),
 		chromedp.Flag("enable-automation", false), // 禁用浏览器正在被自动化程序控制的提示
 	)
-
-	targetOpts = append(targetOpts, opts...)
 
 	allocCtx, cancel := chromedp.NewExecAllocator(context.Background(), targetOpts...)
 	defer cancel()
