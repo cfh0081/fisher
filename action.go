@@ -65,10 +65,10 @@ func RunWithCrawler(crawler Crawler, opts ...chromedp.ExecAllocatorOption) {
 		chromedp.Flag("enable-automation", false), // 禁用浏览器正在被自动化程序控制的提示
 
 		// 关闭webrtc，防止暴露真实IP，实际验证未起作用
-		chromedp.Flag("webrtc.ip_handling_policy", "disable_non_proxied_udp"),
-		chromedp.Flag("webrtc.multiple_routes_enabled", false),
-		chromedp.Flag("webrtc.nonproxied_udp_enabled", false),
-		chromedp.Flag("force-webrtc-ip-handling-policy", "default_public_interface_only"),
+		// chromedp.Flag("webrtc.ip_handling_policy", "disable_non_proxied_udp"),
+		// chromedp.Flag("webrtc.multiple_routes_enabled", false),
+		// chromedp.Flag("webrtc.nonproxied_udp_enabled", false),
+		// chromedp.Flag("force-webrtc-ip-handling-policy", "default_public_interface_only"),
 	)
 
 	allocCtx, cancel := chromedp.NewExecAllocator(context.Background(), targetOpts...)
