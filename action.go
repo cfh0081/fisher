@@ -62,11 +62,13 @@ func RunWithCrawler(crawler Crawler, opts ...chromedp.ExecAllocatorOption) {
 		chromedp.Flag("incognito", true),       // 隐身模式（无痕模式）
 		chromedp.Flag("log-level", "2"),        // 日志级别 ( info(default) = 0 warning = 1 LOG_ERROR = 2 LOG_FATAL = 3 )
 		chromedp.Flag("lang", `zh-CN,zh,zh-TW,en-US,en`),
-		chromedp.Flag("enable-automation", false),                                         // 禁用浏览器正在被自动化程序控制的提示
-		chromedp.Flag("webrtc.ip_handling_policy", "disable_non_proxied_udp"),             // 关闭webrtc，防止暴露真实IP
-		chromedp.Flag("webrtc.multiple_routes_enabled", false),                            // 关闭webrtc，防止暴露真实IP
-		chromedp.Flag("webrtc.nonproxied_udp_enabled", false),                             // 关闭webrtc，防止暴露真实IP
-		chromedp.Flag("force-webrtc-ip-handling-policy", "default_public_interface_only"), // 关闭webrtc，防止暴露真实IP
+		chromedp.Flag("enable-automation", false), // 禁用浏览器正在被自动化程序控制的提示
+
+		// 关闭webrtc，防止暴露真实IP，实际验证未起作用
+		chromedp.Flag("webrtc.ip_handling_policy", "disable_non_proxied_udp"),
+		chromedp.Flag("webrtc.multiple_routes_enabled", false),
+		chromedp.Flag("webrtc.nonproxied_udp_enabled", false),
+		chromedp.Flag("force-webrtc-ip-handling-policy", "default_public_interface_only"),
 	)
 
 	allocCtx, cancel := chromedp.NewExecAllocator(context.Background(), targetOpts...)
