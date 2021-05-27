@@ -1,5 +1,7 @@
 github.com/akamensky/argparse v1.2.2 h1:P17T0ZjlUNJuWTPPJ2A5dM1wxarHgHqfYH+AZTo2xQA=
 github.com/akamensky/argparse v1.2.2/go.mod h1:S5kwC7IuDcEr5VeXtGPRVZ5o/FdhcMlQz4IZQuw64xA=
+github.com/cfh0081/baseutils v0.0.1 h1:XLo/nCXMcvXqyUoYjKJEZ5Oq7b7nDOHGQUcuZAEvuaw=
+github.com/cfh0081/baseutils v0.0.1/go.mod h1:i/AtmIm/aDeIavgtO2Ng1QEgj2wNebexhJ+YC4hDvZU=
 github.com/cfh0081/runutils v0.0.3 h1:Lee0PZ4/KKneCV7lQRxuCl0M3rP/wBZcgq2qmsjjjwo=
 github.com/cfh0081/runutils v0.0.3/go.mod h1:FX9xmKmg9Pt6FuNMpfPpRjDEhMX/171oDGQjburPfDU=
 github.com/chromedp/cdproto v0.0.0-20210508221054-d7cfa85db7d1 h1:EqxjOTf4Eh30cZ9OqA7pBzKEv3d+QDz0t/1HeRK/IaM=

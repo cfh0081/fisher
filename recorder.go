@@ -2,6 +2,7 @@ package fisher
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"os"
 	"sync"
@@ -60,8 +61,25 @@ func GetStorageInstance() *Storage {
 	return storage
 }
 
-func RecordData(data []byte) {
-	GetStorageInstance().WriteData(data)
+// 写入已经json序列化好的字符数组，字符串或者是可以进行json序列化的对象
+func RecordData(data interface{}) (err error) {
+	var target []byte
+	err = nil
+	switch ret := data.(type) {
+	case []byte:
+		target = ret
+	case string:
+		target = []byte(ret)
+	default:
+		target, err = json.Marshal(ret)
+		if err != nil {
+			return
+		}
+	}
+
+	GetStorageInstance().WriteData(target)
+
+	return
 }
 
 // 如果要将数据存储到文件中，则先需要调用该接口，设置用于写入的文件句柄
