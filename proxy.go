@@ -5,7 +5,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"net/http"
 	"time"
 )
@@ -42,7 +42,7 @@ func GetProxyInfo(ctx context.Context, url string) (ret ProxyInfo, err error) {
 	var rtnData ProxyResponse
 
 	//返回的状态码
-	bodyContent, _ := ioutil.ReadAll(resp.Body)
+	bodyContent, _ := io.ReadAll(resp.Body)
 	if err = json.Unmarshal(bodyContent, &rtnData); err == nil {
 		if rtnData.Code == 0 {
 			ret = rtnData.Data[0]
